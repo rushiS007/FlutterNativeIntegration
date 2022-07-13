@@ -11,6 +11,7 @@ class Cell extends StatefulWidget {
 class _CellState extends State<Cell> {
   static const batteryChannel = MethodChannel('rushi.com/battery');
   String batteryLevel = 'Listening...';
+  int counter = 0;
   @override
   void initState() {
     super.initState();
@@ -20,9 +21,11 @@ class _CellState extends State<Cell> {
   void onListenBattery() {
     batteryChannel.setMethodCallHandler((call) async {
       if (call.method == 'reportBatteryLevel') {
-        final int batteryLevel = call.arguments;
+        final int batteryLvl = call.arguments;
+        print(batteryLvl);
         setState(() {
-          this.batteryLevel = '$batteryLevel';
+          batteryLevel = '$batteryLvl';
+          print("batteryLevel is $batteryLevel");
         });
       }
     });
@@ -32,15 +35,12 @@ class _CellState extends State<Cell> {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     return Scaffold(
-      body: SafeArea(
-          child: Container(
-        color: Colors.white,
-        alignment: Alignment.center,
-        child: Text(
-          batteryLevel,
-          style: theme.textTheme.headline3,
+        backgroundColor: Colors.amber,
+        body: Center(
+                child:Text(batteryLevel,style: theme.textTheme.headline6,)
+            
         ),
-      )),
+        resizeToAvoidBottomInset: false,
     );
   }
 }

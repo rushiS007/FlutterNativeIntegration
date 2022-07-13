@@ -2,8 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_module/screens/cell.dart';
 import 'package:flutter_module/screens/demo.dart';
 import 'package:flutter_module/screens/flutter.dart';
+import 'package:flutter_module/screens/secret.dart';
 
-void main() => runApp(const MyApp());
+void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  runApp(const MyApp());
+}
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
@@ -29,7 +33,8 @@ class MyApp extends StatelessWidget {
       routes: {
         "/": (context) => FlutterScreen(),
         "/demo": (context) => DemoScreen(),
-        "/cell": (context) => Cell()
+        "/cell": (context) => Cell(),
+        "/secret":(context) => Secret()
       },
     );
   }
